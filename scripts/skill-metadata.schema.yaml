@@ -1,0 +1,80 @@
+# Schema for skill-metadata.yaml files
+# Used by scripts/validate-skill.sh to validate skill directories
+
+required_fields:
+  - name: name
+    type: string
+    description: Unique skill identifier (kebab-case)
+    pattern: "^[a-z0-9][a-z0-9-]*$"
+
+  - name: version
+    type: string
+    description: Semantic version
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+
+  - name: description
+    type: string
+    description: One-line description of the skill
+
+  - name: status
+    type: enum
+    values: [stable, experimental, deprecated]
+    description: Maturity level of the skill
+
+optional_fields:
+  - name: tags
+    type: list
+    item_type: string
+    description: Discovery tags
+
+  - name: mcp-servers
+    type: list
+    description: MCP server dependencies
+    item_fields:
+      required: [name, package, type, command, args]
+      optional: [env, scope]
+
+  - name: system-deps
+    type: list
+    description: System dependencies (checked, not auto-installed)
+    item_fields:
+      required: [name, check-command]
+      optional: [min-version]
+
+  - name: npm-packages
+    type: list
+    item_type: string
+    description: npm packages to install
+
+  - name: pip-packages
+    type: list
+    item_type: string
+    description: pip packages to install
+
+  - name: includes
+    type: list
+    item_type: string
+    description: Additional files/dirs to copy with the skill
+
+  - name: sub-agent
+    type: object
+    description: Sub-agent configuration for context isolation
+    fields:
+      required: [description, tools]
+      optional: [model, examples]
+    field_details:
+      examples:
+        type: list
+        description: >
+          Trigger examples shown in the agent description so Claude knows when
+          to proactively invoke this agent. Each entry becomes an <example> block.
+        item_fields:
+          required: [user, assistant]
+          optional: [context, commentary]
+
+  - name: verify
+    type: list
+    description: Verification checks run after install/update
+    item_fields:
+      required: [description]
+      optional: [command, expect, tool, args, check, path]

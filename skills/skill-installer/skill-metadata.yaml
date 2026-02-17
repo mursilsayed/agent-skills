@@ -1,0 +1,17 @@
+name: skill-installer
+version: 1.0.0
+description: Meta skill that installs, updates, and manages other skills from the repository
+tags: [meta, installer, management]
+status: stable
+
+mcp-servers: []
+system-deps: []
+npm-packages: []
+pip-packages: []
+includes: []
+sub-agent: {}
+
+verify:
+  - description: "Skill index exists"
+    check: file-exists
+    path: "skill-index.yaml"

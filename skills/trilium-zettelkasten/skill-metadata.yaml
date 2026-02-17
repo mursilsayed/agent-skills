@@ -1,0 +1,73 @@
+name: trilium-zettelkasten
+version: 1.0.0
+description: Create atomic Zettelkasten notes in Trilium
+tags: [knowledge-management, trilium, zettelkasten]
+status: stable
+
+mcp-servers:
+  - name: trilium
+    package: trilium-bolt
+    type: stdio
+    command: npx
+    args: ["-y", "trilium-bolt"]
+    env:
+      - name: TRILIUM_TOKEN
+        description: "Trilium ETAPI token (generate in Trilium > Options > ETAPI)"
+        required: true
+        secret: true
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+
+npm-packages: []
+pip-packages: []
+includes: []
+
+sub-agent:
+  description: >
+    Handles Trilium zettelkasten operations: searching, creating, updating, and
+    linking notes. Keeps Trilium MCP tool calls out of the main conversation
+    context. Use this agent whenever the user wants to capture, retrieve, or
+    connect knowledge in their Trilium notes database.
+  examples:
+    - context: User wants to save something to their notes
+      user: "Save a note about the CAP theorem"
+      assistant: "I'll use the trilium-zettelkasten agent to create an atomic note on the CAP theorem."
+      commentary: >
+        Any request to capture, save, or write a note should be delegated to
+        the trilium-zettelkasten agent.
+    - context: User wants to find or retrieve notes
+      user: "Find my notes on event sourcing"
+      assistant: "Let me use the trilium-zettelkasten agent to search your Trilium database for event sourcing notes."
+      commentary: >
+        Searching or retrieving notes from Trilium should be delegated to the
+        trilium-zettelkasten agent to keep MCP calls out of the main context.
+    - context: User wants to link or organise existing notes
+      user: "Link my CQRS note to the event sourcing note"
+      assistant: "I'll use the trilium-zettelkasten agent to look up both notes and create the link."
+      commentary: >
+        Any operation that involves reading and updating Trilium notes should
+        go through the trilium-zettelkasten agent.
+  tools:
+    - mcp__trilium__search_notes
+    - mcp__trilium__get_note
+    - mcp__trilium__get_note_tree
+    - mcp__trilium__create_note
+    - mcp__trilium__update_note
+    - mcp__trilium__create_revision
+  model: sonnet
+
+verify:
+  - description: "MCP server responds"
+    command: "npx -y trilium-bolt --help"
+    expect: exit-code-0
+  - description: "Trilium API reachable"
+    tool: mcp__trilium__search_notes
+    args: { query: "#inbox" }
+    expect: no-error
+  - description: "Skill file installed"
+    check: file-exists
+    path: "~/.claude/skills/trilium-zettelkasten/SKILL.md"

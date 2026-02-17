@@ -1,0 +1,29 @@
+name: generate-bounded-context-map
+version: 1.0.0
+description: Generate ER diagrams for bounded contexts with ubiquitous language
+tags: [domain-driven-design, diagrams, mermaid]
+status: stable
+
+mcp-servers: []
+
+system-deps:
+  - name: python3
+    min-version: "3.9"
+    check-command: "python3 --version"
+
+npm-packages: []
+pip-packages: []
+
+includes:
+  - scripts/generate_concept_map.py
+  - references/advances_patterns.md
+
+sub-agent: {}
+
+verify:
+  - description: "Python available"
+    command: "python3 --version"
+    expect: exit-code-0
+  - description: "Generation script exists"
+    check: file-exists
+    path: "scripts/generate_concept_map.py"
