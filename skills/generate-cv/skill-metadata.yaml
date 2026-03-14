@@ -1,0 +1,72 @@
+name: generate-cv
+version: 1.0.0
+description: Generate a tailored CV PDF from a Trilium master portfolio, matched to a job description
+status: experimental
+tags: [cv, career, trilium, pdf, job-search]
+
+mcp-servers:
+  - name: trilium
+    package: trilium-bolt
+    type: stdio
+    command: npx
+    args: ["-y", "trilium-bolt"]
+    env:
+      - name: TRILIUM_TOKEN
+        description: "Trilium ETAPI token (generate in Trilium > Options > ETAPI)"
+        required: true
+        secret: true
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+
+npm-packages:
+  - puppeteer
+
+pip-packages: []
+
+includes:
+  - scripts/
+
+sub-agent:
+  description: >
+    Generates a tailored CV PDF by fetching the master portfolio from Trilium,
+    matching it against a job description, and producing a styled PDF via Puppeteer.
+    Use this agent when the user asks to generate, tailor, or export a CV.
+  examples:
+    - context: User wants a CV tailored to a job posting
+      user: "Generate a CV for this role: <url>"
+      assistant: "I'll use the generate-cv agent to fetch the JD, match it against your portfolio, and produce a tailored PDF."
+      commentary: >
+        Any request to generate or tailor a CV should be delegated to the
+        generate-cv agent to keep Trilium MCP calls and Bash execution out
+        of the main conversation context.
+    - context: User pastes a job description
+      user: "Create a CV for this JD: <pasted text>"
+      assistant: "I'll launch the generate-cv agent to match your portfolio against this JD and build a PDF."
+      commentary: >
+        Works with pasted JD text as well as URLs.
+  tools:
+    - mcp__trilium__search_notes
+    - mcp__trilium__get_note
+    - WebFetch
+    - Bash
+    - Write
+  model: sonnet
+
+verify:
+  - description: "Node.js available"
+    command: "node --version"
+    expect: exit-code-0
+  - description: "Trilium API reachable"
+    tool: mcp__trilium__search_notes
+    args: { query: "Master Portfolio" }
+    expect: no-error
+  - description: "Skill file installed"
+    check: file-exists
+    path: "~/.claude/skills/generate-cv/SKILL.md"
+  - description: "PDF script installed"
+    check: file-exists
+    path: "~/.claude/skills/generate-cv/scripts/html-to-pdf.js"
