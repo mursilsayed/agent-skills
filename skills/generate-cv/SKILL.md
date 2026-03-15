@@ -60,22 +60,23 @@ Produce a complete HTML document styled to match this specification:
 
 **Structure (in order):**
 1. Name — centred, serif, 24px
-2. Contact line — centred, 10px (phone | email | LinkedIn | GitHub)
-3. Summary — bullet list (3–4 bullets)
-4. Skills — two-column table (category | values), border 1px solid #aaa
-5. Education — two-column table (degree | year)
-6. Work Experience — for each role:
+2. Headline — centred, 12px bold, mirrors the JD job title (e.g. "Digital Solutions Architect"). Tailored per role.
+3. Contact line — centred, 10px (phone | email | LinkedIn | GitHub)
+4. Summary — bullet list (3–4 bullets)
+5. Skills — plain `<p>` tags, one per category: `<strong>Category:</strong> value, value, value`. No tables. 7 merged categories in order: Programming Languages, Frameworks & APIs, Cloud & Infrastructure, Databases, DevOps & CI/CD, Observability & Testing, Frontend & Mobile. Reorder and trim categories to match the JD.
+6. Education & Certifications — plain `<p>` tags, one entry per line. No tables. No graduation years. Include certifications first, then degrees.
+7. Work Experience — for each role:
    - `<company> | <title> | <dates>` in bold
    - One italic context line
    - Bullet accomplishments
 
 **CSS reference:**
 ```css
-body { font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.5; padding: 36px 48px; }
-h1   { text-align: center; font-size: 24px; font-family: serif; }
-h2   { font-size: 13px; border-bottom: 1px solid #000; margin-top: 14px; font-family: serif; }
-table td { border: 1px solid #aaa; padding: 4px 8px; font-size: 10.5px; }
-table td:first-child { width: 30%; white-space: nowrap; }
+body     { font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.5; padding: 36px 48px; }
+h1       { text-align: center; font-size: 24px; font-family: serif; margin-bottom: 2px; }
+.headline{ text-align: center; font-size: 12px; font-weight: bold; margin-bottom: 4px; letter-spacing: 0.5px; }
+h2       { font-size: 13px; border-bottom: 1px solid #000; margin-top: 14px; font-family: serif; }
+p        { margin-bottom: 3px; }
 ```
 
 ### Step 5 — Write & Convert to PDF
@@ -87,7 +88,7 @@ table td:first-child { width: 30%; white-space: nowrap; }
    - `/Applications/Brave Browser.app/Contents/MacOS/Brave Browser`
 3. Run the conversion script:
    ```bash
-   node ~/.claude/skills/generate-cv/scripts/html-to-pdf.js \
+   NODE_PATH=$(npm root -g) node ~/.claude/skills/generate-cv/scripts/html-to-pdf.js \
      --input output/<CompanyName>-CV.html \
      --output output/<CompanyName>-CV.pdf \
      --browser "<browser-path>"
