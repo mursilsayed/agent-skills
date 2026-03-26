@@ -49,10 +49,14 @@ Cross-reference the JD against the portfolio:
 1. **Domain tags** — identify which domain expertise tags align with the JD, these determine which roles to foreground
 2. **Skills** — from the skills inventory, select the categories and tools most relevant to the JD; reorder to put JD-matching skills first
 3. **Roles** — select 3–5 roles to include at full depth; older or less relevant roles get 1–2 bullets or are dropped
-4. **Accomplishments** — from each selected role, pick bullets that use the JD's own language or demonstrate directly relevant impact. Frame every bullet as an **outcome → impact → broader impact chain**: a quantified metric alone is weak framing — always complete the chain to the business or user consequence using connective language ("which enabled", "resulting in", "ultimately leading to"). Lead with the bullet that has the strongest chain.
+4. **Accomplishments** — from each selected role, pick bullets that use the JD's own language or demonstrate directly relevant impact. Use the compressed STAR formula for every bullet:
 
-   > Weak: "Reduced database query time by 90%"
-   > Strong: "Reduced database query time by 90%, enabling dashboards to load instantly — improving NPS by 12 points and cutting support tickets by 25%"
+   > **[Result/Outcome] by [Action] — [broader Impact]**
+
+   The italic context line under each role provides the Situation and Task — do not repeat them in bullets. Lead with Result, not with what you did. A quantified metric alone is weak framing — always complete the chain to the business or user consequence using connective language ("which enabled", "resulting in", "ultimately leading to"). Lead with the bullet that has the strongest chain.
+
+   > Weak (Action-first): "Rewrote the top 10 database queries, reducing load time by 90%"
+   > Strong (Result-first): "Reduced database query time by 90% by rewriting the top 10 slowest queries — enabling dashboards to load instantly, improving NPS by 12 points and cutting support tickets by 25%"
 
    **Credibility checklist — every bullet must pass:**
    - **Baseline**: include before → after (`from X → to Y`), not just a % or multiplier in isolation
@@ -78,8 +82,8 @@ Produce a complete HTML document styled to match this specification:
 6. Education & Certifications — plain `<p>` tags, one entry per line. No tables. No graduation years. Include certifications first, then degrees.
 7. Work Experience — for each role:
    - `<company> | <title> | <dates>` in bold
-   - One italic context line
-   - Bullet accomplishments
+   - One italic context line — this provides the Situation and Task (S+T) so bullets don't need to repeat context
+   - Bullet accomplishments — each following `[Result/Outcome] by [Action] — [broader Impact]`
 
 **CSS reference:**
 ```css
