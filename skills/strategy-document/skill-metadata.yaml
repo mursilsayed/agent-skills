@@ -1,0 +1,33 @@
+name: strategy-document
+version: 1.0.0
+description: Create, review, and audit strategy documents using Roger Martin's framework — integrated choices that position you on a playing field where you can win
+tags: [strategy, planning, decision-making, roger-martin]
+status: stable
+
+mcp-servers:
+  - name: trilium
+    package: trilium-bolt
+    type: stdio
+    command: npx
+    args: ["-y", "trilium-bolt"]
+    env:
+      - name: TRILIUM_TOKEN
+        description: "Trilium ETAPI token (generate in Trilium > Options > ETAPI). Required only for regenerating the skill from its source-of-truth Trilium note."
+        required: true
+        secret: true
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+
+npm-packages: []
+pip-packages: []
+includes: []
+sub-agent: {}
+
+verify:
+  - description: "Skill file exists"
+    check: file-exists
+    path: "~/.claude/skills/strategy-document/SKILL.md"
