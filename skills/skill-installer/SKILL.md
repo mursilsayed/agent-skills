@@ -38,7 +38,7 @@ Display available skills from the repository.
 ```
 | Skill                        | Version | Status | Installed | Dependencies        |
 |------------------------------|---------|--------|-----------|---------------------|
-| trilium-zettelkasten         | 1.0.0   | stable | Yes       | trilium-bolt (MCP)  |
+| zettelkasten         | 1.0.0   | stable | Yes       | trilium-bolt (MCP)  |
 | generate-bounded-context-map | 1.0.0   | stable | No        | python3>=3.9        |
 ```
 
@@ -259,16 +259,16 @@ All operations support two modes:
 "List available skills"
 
 # Install a skill
-"Install the trilium-zettelkasten skill"
+"Install the zettelkasten skill"
 
 # Install without confirmation prompts
-"Install trilium-zettelkasten --auto"
+"Install zettelkasten --auto"
 
 # Update a skill
 "Update generate-bounded-context-map"
 
 # Uninstall a skill
-"Uninstall trilium-zettelkasten"
+"Uninstall zettelkasten"
 ```
 
 ## Configuration Paths

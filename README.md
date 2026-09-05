@@ -27,14 +27,14 @@ The skill-installer will copy itself into your agent's skills directory and from
 
 ```
 "List available skills"
-"Install the trilium-zettelkasten skill"
+"Install the zettelkasten skill"
 ```
 
 ## Available Skills
 
 | Skill | Description | Status | Dependencies |
 |-------|-------------|--------|-------------|
-| [trilium-zettelkasten](skills/trilium-zettelkasten/) | Create atomic Zettelkasten notes in Trilium | stable | trilium-bolt (MCP), node>=18 |
+| [zettelkasten](skills/zettelkasten/) | Create and maintain atomic Zettelkasten notes in Trilium | stable | trilium-bolt (MCP), node>=18 |
 | [generate-bounded-context-map](skills/generate-bounded-context-map/) | Generate ER diagrams for bounded contexts | stable | python3>=3.9 |
 | [strategy-document](skills/strategy-document/) | Create, review, and audit strategy documents (Roger Martin framework) | stable | trilium-bolt (MCP, for regenerating the skill from source), node>=18 |
 | [skill-installer](skills/skill-installer/) | Meta skill: install, update, manage other skills | stable | — |
@@ -69,17 +69,17 @@ The skill-installer is itself a skill that lives at `skills/skill-installer/SKIL
 
 **Install** a skill with all dependencies:
 ```
-"Install the trilium-zettelkasten skill"
+"Install the zettelkasten skill"
 ```
 
 **Update** to the latest version:
 ```
-"Update trilium-zettelkasten"
+"Update zettelkasten"
 ```
 
 **Uninstall** a skill and its dedicated dependencies:
 ```
-"Uninstall trilium-zettelkasten"
+"Uninstall zettelkasten"
 ```
 
 ## Contributing

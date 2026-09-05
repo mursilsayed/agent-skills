@@ -78,16 +78,18 @@ Sub-agents in this repo are **optional**. The `sub-agent` section in `skill-meta
 
 Each skill works without sub-agents — you can always run a skill inline in the main conversation. The sub-agent definition describes an ideal isolated agent configuration for when you want context isolation.
 
-**Example from `trilium-zettelkasten`:**
+**Example from `generate-cv`:**
 ```yaml
 sub-agent:
   description: >
-    Handles Trilium zettelkasten operations: searching, creating,
-    updating, and linking notes.
+    Generates a tailored CV PDF by fetching the master portfolio from Trilium,
+    matching it against a job description, and producing a styled PDF via Puppeteer.
   tools:
     - mcp__trilium__search_notes
-    - mcp__trilium__create_note
-    - mcp__trilium__update_note
+    - mcp__trilium__get_note
+    - WebFetch
+    - Bash
+    - Write
   model: sonnet
 ```
 

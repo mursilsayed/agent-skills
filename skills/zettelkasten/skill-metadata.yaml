@@ -1,0 +1,39 @@
+name: zettelkasten
+version: 1.0.0
+description: Create and maintain atomic Zettelkasten notes in Trilium
+tags: [knowledge-management, trilium, zettelkasten]
+status: stable
+
+mcp-servers:
+  - name: trilium
+    package: trilium-bolt
+    type: stdio
+    command: npx
+    args: ["-y", "trilium-bolt"]
+    env:
+      - name: TRILIUM_TOKEN
+        description: "Trilium ETAPI token (generate in Trilium > Options > ETAPI)"
+        required: true
+        secret: true
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+
+npm-packages: []
+pip-packages: []
+includes: [ABOUT.md, knowledge/, templates/]
+
+verify:
+  - description: "MCP server responds"
+    command: "npx -y trilium-bolt --help"
+    expect: exit-code-0
+  - description: "Trilium API reachable"
+    tool: mcp__trilium__search_notes
+    args: { query: "#inbox" }
+    expect: no-error
+  - description: "Skill file installed"
+    check: file-exists
+    path: "~/.claude/skills/zettelkasten/SKILL.md"

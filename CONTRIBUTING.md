@@ -8,6 +8,9 @@ Each skill lives in its own directory under `skills/`:
 skills/<skill-name>/
 ├── SKILL.md                  # Required: workflow instructions
 ├── skill-metadata.yaml       # Required: metadata and dependencies
+├── ABOUT.md                  # Optional: dependency/knowledge-source detail, linked from SKILL.md
+├── knowledge/                # Optional: skill-local reference material (conventions, rules, terminology)
+├── templates/                # Optional: skill-local templates
 ├── scripts/                  # Optional: supporting scripts
 └── references/               # Optional: reference materials
 ```
