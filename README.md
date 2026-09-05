@@ -35,6 +35,7 @@ The skill-installer will copy itself into your agent's skills directory and from
 | Skill | Description | Status | Dependencies |
 |-------|-------------|--------|-------------|
 | [zettelkasten](skills/zettelkasten/) | Create and maintain atomic Zettelkasten notes in Trilium | stable | trilium-bolt (MCP), node>=18 |
+| [project-foundations](skills/project-foundations/) | Create an Impact Brief, Project Charter, and Deliverable-Oriented WBS using Impact First Thinking | stable | — |
 | [generate-bounded-context-map](skills/generate-bounded-context-map/) | Generate ER diagrams for bounded contexts | stable | python3>=3.9 |
 | [strategy-document](skills/strategy-document/) | Create, review, and audit strategy documents (Roger Martin framework) | stable | trilium-bolt (MCP, for regenerating the skill from source), node>=18 |
 | [skill-installer](skills/skill-installer/) | Meta skill: install, update, manage other skills | stable | — |
