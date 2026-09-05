@@ -1,3 +1,8 @@
+---
+name: skill-installer
+description: Meta skill that installs, updates, and manages other skills from the repository
+---
+
 # Skill Installer
 
 Meta skill for managing skills from the repository. Reads `skill-index.yaml` and individual `skill-metadata.yaml` files to install, update, list, and uninstall skills with their dependencies.

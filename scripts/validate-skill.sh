@@ -31,15 +31,22 @@ validate_skill() {
     else
         log_ok "$skill_name: SKILL.md exists"
 
-        # Check SKILL.md has no YAML frontmatter with dependency fields
-        if head -1 "$skill_dir/SKILL.md" | grep -q '^---'; then
-            # Extract frontmatter
+        # Check SKILL.md has minimal YAML frontmatter (name + description only)
+        if ! head -1 "$skill_dir/SKILL.md" | grep -q '^---'; then
+            log_error "$skill_name: SKILL.md is missing required frontmatter (--- name / description ---) — some agents (e.g. GitHub Copilot CLI) refuse to load a skill without it"
+        else
             frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill_dir/SKILL.md")
             for field in "allowed-tools" "mcp-servers" "dependencies" "npm-packages" "pip-packages"; do
                 if echo "$frontmatter" | grep -qi "$field"; then
                     log_error "$skill_name: SKILL.md frontmatter contains '$field' — move to skill-metadata.yaml"
                 fi
             done
+            if ! echo "$frontmatter" | grep -q "^name:"; then
+                log_error "$skill_name: SKILL.md frontmatter is missing 'name'"
+            fi
+            if ! echo "$frontmatter" | grep -q "^description:"; then
+                log_error "$skill_name: SKILL.md frontmatter is missing 'description'"
+            fi
         fi
     fi
 

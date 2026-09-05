@@ -1,3 +1,8 @@
+---
+name: strategy-document
+description: Create, review, and audit strategy documents using Roger Martin's framework — integrated choices that position you on a playing field where you can win
+---
+
 # Strategy Document Skill
 
 A skill for creating, reviewing, and calibrating strategy documents using Roger Martin's framework: a coherent, integrated set of choices that positions you on a playing field where you can win.

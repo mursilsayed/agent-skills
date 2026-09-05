@@ -1,3 +1,8 @@
+---
+name: generate-bounded-context-map
+description: Generate ER diagrams for bounded contexts with ubiquitous language
+---
+
 # Bounded Context Concept Map Generator
 
 ## Purpose

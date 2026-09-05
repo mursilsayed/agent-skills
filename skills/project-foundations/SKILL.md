@@ -1,3 +1,8 @@
+---
+name: project-foundations
+description: Create an Impact Brief, Project Charter, and Deliverable-Oriented WBS using Impact First Thinking
+---
+
 # Project Foundations
 
 ## 1. Purpose & Scope

@@ -17,7 +17,8 @@ skills/<skill-name>/
 
 ## SKILL.md Guidelines
 
-- **Pure workflow** — No dependency declarations, no install instructions, no frontmatter with metadata
+- **Minimal frontmatter only** — Every SKILL.md must open with a `---` YAML frontmatter block containing exactly `name` and `description`, matching the `name`/`description` fields in `skill-metadata.yaml`. Some agent runtimes (e.g. GitHub Copilot CLI) fail to load a skill without this block, even though Claude Code tolerates its absence. No other metadata (dependencies, install instructions) belongs in this block or elsewhere in SKILL.md.
+- **Pure workflow otherwise** — No dependency declarations, no install instructions beyond the frontmatter above
 - **Agent-agnostic** — Write so any AI agent can follow the instructions, not just Claude Code
 - **Self-contained** — The workflow should be understandable without reading skill-metadata.yaml
 - **Concise** — Skills consume context window tokens; encode just enough structure for reliable execution
@@ -113,7 +114,7 @@ Full schema definition: [`scripts/skill-metadata.schema.yaml`](scripts/skill-met
 The validation script checks:
 
 1. `skill-metadata.yaml` exists and has all required fields
-2. `SKILL.md` exists and has no dependency frontmatter
+2. `SKILL.md` exists, has a `name`/`description` frontmatter block matching `skill-metadata.yaml`, and has no dependency frontmatter
 3. All paths in `includes` actually exist
 4. `name` field matches the directory name
 5. `status` is a valid enum value
@@ -151,7 +152,7 @@ git config core.hooksPath .githooks
    mkdir -p skills/my-new-skill
    ```
 
-2. Write `SKILL.md` — pure workflow instructions
+2. Write `SKILL.md` — starts with `---\nname: my-new-skill\ndescription: ...\n---` frontmatter, then pure workflow instructions
 
 3. Create `skill-metadata.yaml` with at least the required fields:
    ```yaml
@@ -181,7 +182,7 @@ git config core.hooksPath .githooks
 Before committing, verify:
 
 - [ ] `./scripts/validate-skill.sh skills/<name>` passes
-- [ ] SKILL.md contains only workflow instructions (no dependency metadata)
+- [ ] SKILL.md opens with `---` frontmatter containing only `name` and `description` (matching skill-metadata.yaml), and otherwise contains only workflow instructions (no dependency metadata)
 - [ ] skill-metadata.yaml has all required fields
 - [ ] All `includes` paths exist
 - [ ] The skill works when loaded into your AI agent

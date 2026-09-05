@@ -1,3 +1,8 @@
+---
+name: generate-cv
+description: Generate a tailored CV PDF from a Trilium master portfolio, matched to a job description
+---
+
 # Generate CV Skill
 
 Generate a tailored CV PDF from a Trilium master portfolio note, matched against a job description.

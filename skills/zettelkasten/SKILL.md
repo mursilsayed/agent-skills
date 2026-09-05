@@ -1,3 +1,8 @@
+---
+name: zettelkasten
+description: Create and maintain atomic Zettelkasten notes in Trilium
+---
+
 # Zettelkasten
 
 ## 1. Purpose & Scope
