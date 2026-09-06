@@ -10,9 +10,22 @@ Meta skill for managing skills from the repository. Reads `skill-index.yaml` and
 **Repository:** `https://github.com/mursilsayed/agent-skills`
 **Raw base URL:** `https://raw.githubusercontent.com/mursilsayed/agent-skills/main/`
 
+## Workflows Menu
+
+| # | Workflow | Trigger phrases / when to use it | Section |
+|---|----------|-----------------------------------|---------|
+| 0 | Bootstrap | "bootstrap yourself", first-time setup | [Workflow 0: Bootstrap](#workflow-0-bootstrap) |
+| 1 | List | "list available skills", "what skills exist" | [Workflow 1: List](#workflow-1-list) |
+| 2 | Install | "install `<skill>`", "install `<skill>` --auto" | [Workflow 2: Install](#workflow-2-install) |
+| 3 | Update | "update `<skill>`" | [Workflow 3: Update](#workflow-3-update) |
+| 4 | Uninstall | "uninstall `<skill>`", "remove `<skill>`" | [Workflow 4: Uninstall](#workflow-4-uninstall) |
+
+If the request doesn't clearly match exactly one workflow, ask the user which one they want rather than guessing.
+If the user asks what this skill can do, or asks to list workflows, show this table instead of running any workflow.
+
 ## Operations
 
-### 0. Bootstrap
+### Workflow 0: Bootstrap
 
 First-time setup. Copies this skill into the agent's skills directory so it persists across sessions and can manage other skills going forward.
 
@@ -27,7 +40,7 @@ First-time setup. Copies this skill into the agent's skills directory so it pers
 3. **Fetch index** — Download `skill-index.yaml` from the repository raw URL and store it alongside the installer in the skills directory
 4. **Confirm** — Report that the skill-installer is now installed and ready. Show usage examples for listing and installing skills
 
-### 1. List
+### Workflow 1: List
 
 Display available skills from the repository.
 
@@ -47,7 +60,7 @@ Display available skills from the repository.
 | generate-bounded-context-map | 1.0.0   | stable | No        | python3>=3.9        |
 ```
 
-### 2. Install
+### Workflow 2: Install
 
 Set up a skill and all its dependencies.
 
@@ -94,7 +107,7 @@ Set up a skill and all its dependencies.
    - `file-exists`: Verify the file exists at the specified path
    - Report pass/fail for each check
 
-### 3. Update
+### Workflow 3: Update
 
 Upgrade an installed skill to the latest version from the repository.
 
@@ -110,7 +123,7 @@ Upgrade an installed skill to the latest version from the repository.
 5. **Replace skill files** — Overwrite SKILL.md and includes with latest from repo
 6. **Verify** — Run verification checks
 
-### 4. Uninstall
+### Workflow 4: Uninstall
 
 Remove a skill and optionally its dependencies.
 

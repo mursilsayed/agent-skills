@@ -22,6 +22,7 @@ skills/<skill-name>/
 - **Agent-agnostic** — Write so any AI agent can follow the instructions, not just Claude Code
 - **Self-contained** — The workflow should be understandable without reading skill-metadata.yaml
 - **Concise** — Skills consume context window tokens; encode just enough structure for reliable execution
+- **Workflows menu for multi-workflow skills** — If a SKILL.md defines more than one workflow, add a menu table (#, workflow, trigger phrases, section link) right after the title/intro, before any workflow instructions. List every workflow, tell the agent to ask the user when a request doesn't clearly match exactly one, and to show the table (not run a workflow) if asked what the skill can do. Number each workflow header to match the table row.
 
 ## skill-metadata.yaml Schema
 

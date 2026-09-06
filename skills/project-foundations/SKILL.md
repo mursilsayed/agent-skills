@@ -13,9 +13,20 @@ Build the three foundational documents of a piece of work, in sequence: the case
 
 No external tools or MCP servers required — this skill works entirely from conversation and its own local knowledge/templates. See [`./ABOUT.md`](./ABOUT.md) for details.
 
+## Workflows Menu
+
+| # | Workflow | Trigger phrases / when to use it | Section |
+|---|----------|-----------------------------------|---------|
+| 1 | Create Impact Brief | work not yet approved, deciding whether to commit | [Workflow 1: Create Impact Brief](#workflow-1-create-impact-brief) |
+| 2 | Create Project Charter | work approved, needs execution scaffolding | [Workflow 2: Create Project Charter](#workflow-2-create-project-charter) |
+| 3 | Create Deliverable-Oriented WBS | charter approved, needs a ticket-ready plan | [Workflow 3: Create Deliverable-Oriented WBS](#workflow-3-create-deliverable-oriented-wbs) |
+
+If the request doesn't clearly match exactly one workflow, ask the user which one they want rather than guessing.
+If the user asks what this skill can do, or asks to list workflows, show this table instead of running any workflow.
+
 ## 3. Supported workflows
 
-### 3.1 Create Impact Brief
+### Workflow 1: Create Impact Brief
 
 Use before a project is approved — decides **whether** to commit, not how to deliver. Follow the Impact First Process end to end (`knowledge/impact-first-process.md`):
 
@@ -27,16 +38,16 @@ Use before a project is approved — decides **whether** to commit, not how to d
 6. Define Desired Outcomes as binary conditions, not solutions (Phase 6).
 7. Assemble the result into `templates/impact-brief.md`. Do not include solution options — those are explicitly out of scope for this document.
 
-### 3.2 Create Project Charter
+### Workflow 2: Create Project Charter
 
 Use once work is approved to proceed.
 
-1. If an Impact Brief exists for this work, carry its Problem Statement, Impact, and Outcomes forward **unchanged**. If not, derive them directly with the user using the same Problem Framing / Accomplishment Framing techniques as 3.1.
+1. If an Impact Brief exists for this work, carry its Problem Statement, Impact, and Outcomes forward **unchanged**. If not, derive them directly with the user using the same Problem Framing / Accomplishment Framing techniques as Workflow 1.
 2. For each outcome, define verification: what "true" looks like precisely, who verifies it, when, and what verification deliverable produces the evidence (`knowledge/framing-and-verification.md`).
 3. Fill in Scope & High Level Requirements, Deliverables, and Risks with the user.
 4. Assemble the result into `templates/project-charter.md`.
 
-### 3.3 Create Deliverable-Oriented WBS
+### Workflow 3: Create Deliverable-Oriented WBS
 
 Use once a Project Charter's outcomes and deliverables are approved.
 
