@@ -1,0 +1,16 @@
+name: context-hub
+version: 1.0.0
+description: Install or uninstall context-hub contexts/dimensions in a project's AGENTS.md, author new contexts/dimensions into the context-hub repo, and list what's wired into the current project
+tags: [context-management, agents-md, knowledge-management]
+status: experimental
+
+system-deps:
+  - name: context-hub-repo
+    check-command: "test -f \"$HOME/.config/context-hub/config.json\""
+
+includes: [ABOUT.md, knowledge/, templates/]
+
+verify:
+  - description: "context-hub location configured"
+    command: "test -f \"$HOME/.config/context-hub/config.json\""
+    expect: exit-code-0
