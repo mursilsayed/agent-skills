@@ -15,9 +15,22 @@ Four workflows: **Install context** (wire a context/dimension into the current p
 
 Requires the context-hub git repository, located via a small local config file rather than an MCP server or package. See [`./ABOUT.md`](./ABOUT.md) for dependency detail and runtime assumptions, [`./knowledge/reference-syntax.md`](./knowledge/reference-syntax.md) for the dimension-reference shorthand, and [`./templates/agents-md-section.md`](./templates/agents-md-section.md) for the exact `AGENTS.md` section this skill reads and writes.
 
+## Workflows Menu
+
+| # | Workflow | Trigger phrases / when to use it | Section |
+|---|----------|-----------------------------------|---------|
+| 1 | Install context | wire a context/dimension into the current project | [Workflow 1: Install context](#workflow-1-install-context) |
+| 2 | Uninstall context | unwire a context/dimension from the current project | [Workflow 2: Uninstall context](#workflow-2-uninstall-context) |
+| 3 | Author context | add or update content inside context-hub itself | [Workflow 3: Author context](#workflow-3-author-context) |
+| 4 | List context | show what's wired into the current project | [Workflow 4: List context](#workflow-4-list-context) |
+
+Every workflow above first runs [Locate context-hub](#locate-context-hub-run-before-any-workflow-below).
+If the request doesn't clearly match exactly one workflow, ask the user which one they want rather than guessing.
+If the user asks what this skill can do, or asks to list workflows, show this table instead of running any workflow.
+
 ## 3. Supported workflows
 
-### 3.0 Locate context-hub (run before any workflow below)
+### Locate context-hub (run before any workflow below)
 
 Configuration lives at a single, fixed, platform-independent path — `~/.config/context-hub/config.json` — deliberately outside any agent-specific skills directory, so it's found the same way regardless of which agent runtime is running this skill.
 
@@ -26,7 +39,7 @@ Configuration lives at a single, fixed, platform-independent path — `~/.config
 3. If it still doesn't validate after asking: **stop and fail clearly** — show the expected structure (`<path>/context/`, `<path>/README.md`) and do not proceed into any workflow below.
 4. Otherwise, read `<contextHubPath>/README.md` now (or re-read if it's been a while) — its conventions govern everything below. Keep the resolved `contextHubPath` for the rest of this session.
 
-### 3.1 Install context
+### Workflow 1: Install context
 
 Wires an existing context-hub context or specific dimension into the **current** project's `AGENTS.md`.
 
@@ -36,12 +49,12 @@ Wires an existing context-hub context or specific dimension into the **current**
 4. For any dimension the user explicitly wants read eagerly (not just reachable via its index's own on-demand guidance), add its absolute path to the template's "Eager dimensions" sub-list. Leave dimensions not explicitly marked eager alone — they stay lazy by default, exactly as context-hub already documents.
 5. Always write **absolute paths**.
 6. If `AGENTS.md` didn't exist before this run, include the template's two `<!-- -->` comment lines verbatim, and — if the project has a git repo — check `.gitignore` covers `AGENTS.md`, offering to add it if missing.
-7. To remove wiring later, use **Uninstall context** (3.2) rather than hand-editing.
+7. To remove wiring later, use **Workflow 2: Uninstall context** rather than hand-editing.
 8. Show the exact diff to `AGENTS.md` before writing it, and confirm.
 
-### 3.2 Uninstall context
+### Workflow 2: Uninstall context
 
-Unwires a context or specific eager dimension from the **current** project's `AGENTS.md`. This never touches the context-hub repository itself — to delete a context or dimension from the hub, see Author context (3.3) instead.
+Unwires a context or specific eager dimension from the **current** project's `AGENTS.md`. This never touches the context-hub repository itself — to delete a context or dimension from the hub, see **Workflow 3: Author context** instead.
 
 1. Locate the current project's `AGENTS.md` (cwd, or ask). If it doesn't exist, or has no `## Agent Context (context-hub)` section, report there's nothing to remove and stop.
 2. Parse the section per the parsing rule in [`./templates/agents-md-section.md`](./templates/agents-md-section.md) and show the user what's currently wired (context slugs, and eager dimensions per slug).
@@ -49,7 +62,7 @@ Unwires a context or specific eager dimension from the **current** project's `AG
 4. If the removal leaves the `## Agent Context (context-hub)` section with no index lines at all, remove the whole section — including its two leading `<!-- -->` comment lines — rather than leaving an empty header behind.
 5. Show the exact diff to `AGENTS.md` before writing it, and confirm.
 
-### 3.3 Author context
+### Workflow 3: Author context
 
 Adds or updates content **inside the context-hub repository itself**. Three sub-flows:
 
@@ -69,7 +82,7 @@ Adds or updates content **inside the context-hub repository itself**. Three sub-
 **Removing a context or dimension**
 Mirrors context-hub's README: `git rm -r context/<slug>` for a whole context (after confirming no project's `AGENTS.md` still references it), or delete a single dimension file and remove its line from that context's `_index.md`. Preview and confirm before committing, same as above.
 
-### 3.4 List context
+### Workflow 4: List context
 
 Read-only report of what's wired into the **current** project.
 
