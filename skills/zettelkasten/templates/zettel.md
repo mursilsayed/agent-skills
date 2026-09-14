@@ -7,6 +7,6 @@
 [Continue explanation]
 
 ### Links
-- **relationship** [Related Zettel](#root/noteId)
+- **relationship** <a class="reference-link" href="#root/noteId">Related Zettel</a>
 
 source: [Source Title](url)

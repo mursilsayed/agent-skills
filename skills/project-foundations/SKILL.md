@@ -44,8 +44,15 @@ Use once work is approved to proceed.
 
 1. If an Impact Brief exists for this work, carry its Problem Statement, Impact, and Outcomes forward **unchanged**. If not, derive them directly with the user using the same Problem Framing / Accomplishment Framing techniques as Workflow 1.
 2. For each outcome, define verification: what "true" looks like precisely, who verifies it, when, and what verification deliverable produces the evidence (`knowledge/framing-and-verification.md`).
-3. Fill in Scope & High Level Requirements, Deliverables, and Risks with the user.
-4. Assemble the result into `templates/project-charter.md`.
+3. Fill in Scope & High Level Requirements, Deliverables, and Risks with the user. Naming a Deliverable is a solution-selection decision, not neutral inventory-taking — see "Identifying deliverables safely" below. For each candidate, also check whether it's really a bounded artifact (a Deliverable), overlaps an existing Deliverable (fold in), or is unbounded ongoing activity (Out of scope — see "Deliverable vs. ongoing activity" below).
+4. Assemble the result into `templates/project-charter.md`. Render Outcomes and Deliverables as tables, not bullet lists: Outcomes as `# | Outcome | Verification`; Deliverables as `Outcome | Deliverable(s) | Comments`, with one row per Outcome and its one-or-more Deliverables listed in that row's cell (e.g. `D2 — ...<br>D3 — ...`). This keeps the sections separate (diagnose-before-plan discipline) while making the mapping between them visible without merging them, so stakeholders reading the Charter don't have to hunt for how the two sections relate. Use the Comments column for dependencies, sequencing, or negotiation/stall risk on a given Deliverable — don't leave it blank if there's something a reader would otherwise miss.
+
+**Identifying deliverables safely:** picking *which* deliverable satisfies an outcome requires domain expertise, and a wrong pick compounds downstream (rework cascades into scope, WBS, and stakeholder expectations already built on it). De-risk this rather than skipping it:
+- Look for a credible external reference framework/model for this domain and localize it, rather than deriving deliverables from first principles — this also reduces the domain-mastery-before-credibility pressure on whoever is drafting.
+- Treat the first-pass Deliverables list as provisional, not final (progressive elaboration / rolling wave planning) — it's expected to be revised as understanding improves, including after Charter sign-off.
+- The real safeguard against a wrong choice is stakeholder review at sign-off, not getting it right solo before showing anyone — don't over-invest in perfecting the list before it's been seen.
+
+**Deliverable vs. ongoing activity:** when deciding whether something belongs as its own Deliverable, ask whether it's a *bounded artifact* (has a natural "done" state, can be handed over and verified) or *unbounded ongoing activity* (execution/operations work with no natural end, e.g. "cleanup," "maintenance," "support"). Bounded → a Deliverable (or folds into an existing one covering the same artifact). Unbounded → Out of scope for the Charter/WBS, owned by whichever role holds ongoing operational accountability — pulling it in as a Deliverable makes the program's completion hostage to work that never naturally finishes.
 
 ### Workflow 3: Create Deliverable-Oriented WBS
 

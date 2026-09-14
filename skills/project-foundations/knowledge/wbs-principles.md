@@ -31,6 +31,7 @@ Each node is an outcome that can be demoed, tested, or shown, and can be broken 
 - **100% rule:** the WBS captures 100% of the work defined by project scope at every level — the sum of child-level work must equal 100% of the parent, no more, no less. Applies down to the activity level within each work package too.
 - **Mutually exclusive elements:** no overlap in scope between WBS elements — ambiguity causes duplicated work, cost-accounting confusion, or disputed ownership.
 - **Never confuse deliverables with actions or outcomes.** Outcomes (binary conditions) sit above the WBS in the Project Charter; deliverables (things produced) are the WBS elements; activities (the work) sit below the WBS.
+- **Deliverable vs. ongoing activity, at the Charter stage already:** before a candidate deliverable reaches the WBS, check it's a *bounded artifact* (has a natural done state) rather than *unbounded ongoing activity* (no natural end — cleanup, maintenance, support). The latter belongs in Out of scope, owned by whoever holds ongoing operational accountability, not as a WBS element — otherwise the WBS never reaches 100% complete by design.
 - **Use nouns, not verbs** for work package / deliverable names (e.g. "ADC IT Ops training", not "Provide training to ADC IT Ops team").
 - **Single organisational unit or person accountable** for each deliverable.
 - **Include internal deliverables too** (requirements docs, design docs, test reports, deployment plans), not just customer-facing ones.

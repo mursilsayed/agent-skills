@@ -23,6 +23,8 @@ The hierarchy that underlies all three workflows in this skill. Work backwards f
 
 You can ship the deliverable and fail the outcome.
 
+**Sharper framing for stakeholder communication:** an Outcome is solution- and technology-independent — it defines what must become true, not how, and stays stable even if the Deliverable that satisfies it changes. A Deliverable is the specific solution chosen to satisfy an Outcome, and can be revised without reopening the Outcome. Concrete test: if the tooling or method changes but the condition you're aiming for doesn't, you're looking at a Deliverable change, not an Outcome change (e.g. "the vendor tool we planned to use got discontinued" changes which Deliverable produces the evidence, not the Outcome it was meant to satisfy).
+
 ## Worked example
 
 *Context: Users are churning because the app is slow.*

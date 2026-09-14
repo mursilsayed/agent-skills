@@ -2,6 +2,8 @@
 
 Outlines implement the **Folgezettel** principle: zettels are arranged as a parent-child hierarchy, not a flat list. Position in the outline is meaningful.
 
+The diagrams below use plain `[Title](#root/noteId)` markdown links for readability, but when actually editing an outline note, use the same reference-link syntax as zettel forward links (see `zettel-format.md`) — `<a class="reference-link" href="#root/noteId">Title</a>` — so an outline entry's label doesn't go stale if the zettel it points to is later renamed.
+
 ```markdown
 * [Root concept A](#root/noteId)          ← starting thought
   * [Continues A](#root/noteId)           ← child: continues the thought

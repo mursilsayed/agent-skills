@@ -19,3 +19,22 @@ Always use `#root/noteId` format for internal links (not `#noteId`). When `trili
 [Note Title](#root/abc123xyz)   ✓ — auto-creates internalLink relation
 [Note Title](#abc123xyz)        ✗ — does NOT auto-create internalLink relation
 ```
+
+## Forward links — use reference links, not plain hyperlinks
+
+Write every `## Links` entry as a Trilium **reference link**, not a plain markdown hyperlink. A plain link (`[Note Title](#root/noteId)`) freezes the target's title as static text at write time — rename the target later and every note linking to it now shows a stale label. A reference link instead always displays the target's *current* title and icon, because Trilium resolves it live at render time rather than storing the label.
+
+Embed it as raw HTML, inline within the markdown content (markdown passes inline HTML through unchanged, so this is safe to mix with the rest of a markdown-formatted note):
+
+```html
+<a class="reference-link" href="#root/abc123xyz">Note Title</a>
+```
+
+The inner text is a placeholder only — Trilium's editor ignores it and renders the live title instead — but still fill it with the note's title at time of writing, both for readability of the raw source and because `trilium-bolt`'s `#root/noteId` detection (above) still needs to see the href to create the `internalLink` relation.
+
+```markdown
+✓  * **related** <a class="reference-link" href="#root/abc123xyz">Note Title</a>
+✗  * **related** [Note Title](#root/abc123xyz)   — title text goes stale if the target is renamed
+```
+
+Plain markdown links are still fine for linking *out* to external sources (the `source:` line) — this rule is only for links between zettels.
