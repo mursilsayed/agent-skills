@@ -1,0 +1,5 @@
+name: grilling
+version: 1.0.0
+description: Grill the user relentlessly about a plan, decision, or idea until a shared understanding is reached. Use when the user wants to stress-test their thinking, or says things like "grill me", "stress-test this", "poke holes in this", "challenge my plan", "interview me about this", or "sparring".
+tags: [productivity, interview, decision-making]
+status: experimental
