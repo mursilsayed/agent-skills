@@ -58,11 +58,22 @@ Use once work is approved to proceed.
 
 Use once a Project Charter's outcomes and deliverables are approved.
 
+**First, ask the user which output format they want.** Do not assume.
+
+- **Single file (default).** One WBS document that can be used to create real tickets in an external tool such as Jira. Use this for work projects, and whenever the user does not say otherwise. Template: `templates/wbs.md`.
+- **Folder based (personal projects only).** The folders and files are the tickets, so no external ticketing tool is needed. Offer this only when the user says the project is personal. Templates: `templates/wbs-overview.md` and `templates/wbs-task-file.md`.
+
+Steps 1 to 4 are the same for both formats:
+
 1. For each Deliverable in the charter, decompose it into an Epic (a deliverable-domain theme, not a team or phase — nouns, not verbs) containing Tasks.
 2. Phrase every Task as `[Who] can [outcome]`, each demonstrable and owned by a single accountable person or team.
 3. Write 2–4 "done when" checklist items per Task describing observable evidence, not activities.
 4. Check the whole breakdown against `knowledge/wbs-principles.md`: 100% rule, mutually-exclusive elements, deliverables not actions, single ownership, task-sizing rules.
-5. Assemble the result into `templates/wbs.md`, mapping Epics/Tasks directly to the JIRA hierarchy (Epic/Task only, no Sub-Epic or Story).
+
+Step 5 depends on the format:
+
+5. **Single file:** assemble the result into `templates/wbs.md`, mapping Epics/Tasks directly to the JIRA hierarchy (Epic/Task only, no Sub-Epic or Story).
+5. **Folder based:** create `wbs/<D#-deliverable-name>/overview.md` from `templates/wbs-overview.md` (structure diagram, checks, open points). Create one folder per Epic named `<n>-<epic-name>/`, and one file per Task named `<n.m>-<task-name>.md` from `templates/wbs-task-file.md`. The Task file holds fields and status, description, acceptance criteria (the done-when items), output and a dated notes and comments log, so it replaces the ticket. Keep the 100% rule and other checks in the overview. Add a link to the new `wbs/` folder in the project's index file if it has one.
 
 ---
 
