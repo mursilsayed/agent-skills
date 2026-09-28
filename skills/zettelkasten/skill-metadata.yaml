@@ -1,6 +1,6 @@
 name: zettelkasten
-version: 1.0.0
-description: Create and maintain atomic Zettelkasten notes in Trilium
+version: 1.1.0
+description: Create, update and search notes in Trilium, the tool that holds the Zettelkasten
 tags: [knowledge-management, trilium, zettelkasten]
 status: stable
 
