@@ -34,11 +34,15 @@ The skill-installer will copy itself into your agent's skills directory and from
 
 | Skill | Description | Status | Dependencies |
 |-------|-------------|--------|-------------|
-| [zettelkasten](skills/zettelkasten/) | Create and maintain atomic Zettelkasten notes in Trilium | stable | trilium-bolt (MCP), node>=18 |
-| [project-foundations](skills/project-foundations/) | Create an Impact Brief, Project Charter, and Deliverable-Oriented WBS using Impact First Thinking | stable | — |
+| [confluence-doc-sync](skills/confluence-doc-sync/) | Draft and iterate on Confluence pages in a local Markdown file, publishing to Confluence only on an explicit publish step | experimental | mcp-remote (Atlassian MCP), node>=18 |
+| [context-hub](skills/context-hub/) | Install, uninstall, author, and list context-hub contexts/dimensions in a project's AGENTS.md | experimental | context-hub-repo |
 | [generate-bounded-context-map](skills/generate-bounded-context-map/) | Generate ER diagrams for bounded contexts | stable | python3>=3.9 |
-| [strategy-document](skills/strategy-document/) | Create, review, and audit strategy documents (Roger Martin framework) | stable | trilium-bolt (MCP, for regenerating the skill from source), node>=18 |
+| [generate-cv](skills/generate-cv/) | Generate a tailored CV PDF from a Trilium master portfolio, matched to a job description | experimental | trilium-bolt (MCP), node>=18 |
+| [grilling](skills/grilling/) | Grill the user about a plan, decision, or idea until a shared understanding is reached | experimental | — |
+| [project-foundations](skills/project-foundations/) | Create an Impact Brief, Project Charter, and Deliverable-Oriented WBS using Impact First Thinking | stable | — |
 | [skill-installer](skills/skill-installer/) | Meta skill: install, update, manage other skills | stable | — |
+| [strategy-document](skills/strategy-document/) | Create, review, and audit strategy documents (Roger Martin framework) | stable | trilium-bolt (MCP, for regenerating the skill from source), node>=18 |
+| [zettelkasten](skills/zettelkasten/) | Create, update and search notes in Trilium, the tool that holds the Zettelkasten | stable | trilium-bolt (MCP), node>=18 |
 
 ## How It Works
 

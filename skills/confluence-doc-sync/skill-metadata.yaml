@@ -1,0 +1,26 @@
+name: confluence-doc-sync
+version: 1.0.0
+description: Create and maintain Confluence pages efficiently by drafting and iterating in a local Markdown file, and only pushing the full page to Confluence on an explicit publish step. Use this when the user wants to create a Confluence page, update an existing Confluence page, rubber-duck or iterate on a document that will eventually live in Confluence, or complains that Confluence updates are slow/expensive/looping.
+tags: [confluence, atlassian, documentation]
+status: experimental
+
+mcp-servers:
+  - name: atlassian
+    package: mcp-remote
+    type: stdio
+    command: npx
+    args: ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/mcp"]
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+
+npm-packages: []
+pip-packages: []
+
+verify:
+  - description: "Skill file installed"
+    check: file-exists
+    path: "~/.claude/skills/confluence-doc-sync/SKILL.md"

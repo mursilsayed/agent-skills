@@ -176,7 +176,30 @@ git config core.hooksPath .githooks
    ./scripts/generate-index.sh
    ```
 
-7. Commit — the pre-commit hook will re-validate and update the index
+7. Add the skill to the README — see [Keeping the README in Sync](#keeping-the-readme-in-sync)
+
+8. Commit — the pre-commit hook will re-validate and update the index
+
+## Keeping the README in Sync
+
+The "Available Skills" table in `README.md` is maintained by hand. The pre-commit hook regenerates `skill-index.yaml` but does not touch the README, so update the table in the same commit whenever you:
+
+- **Add a skill** — add a row
+- **Change a skill's `description`, `status`, `mcp-servers`, or `system-deps`** — update its row
+- **Remove or rename a skill** — remove or rename its row
+
+Row format:
+
+```
+| [<name>](skills/<name>/) | <description> | <status> | <dependencies> |
+```
+
+- Keep rows in alphabetical order by skill name
+- **Description** — one short sentence saying what the skill does; drop the "Use when…" trigger phrases from the metadata description
+- **Status** — the `status` value from `skill-metadata.yaml`
+- **Dependencies** — MCP packages as `<package> (MCP)`, then system deps as `<name>>=<min-version>`, comma-separated; `—` if there are none
+
+The `requires` block for the skill in `skill-index.yaml` lists the same dependencies, so use it to cross-check.
 
 ## Testing Your Skill
 
@@ -186,5 +209,6 @@ Before committing, verify:
 - [ ] SKILL.md opens with `---` frontmatter containing only `name` and `description` (matching skill-metadata.yaml), and otherwise contains only workflow instructions (no dependency metadata)
 - [ ] skill-metadata.yaml has all required fields
 - [ ] All `includes` paths exist
+- [ ] The skill has an up-to-date row in the README.md "Available Skills" table
 - [ ] The skill works when loaded into your AI agent
 - [ ] Verify checks (if defined) pass after installation
