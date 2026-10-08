@@ -1,0 +1,5 @@
+name: project-naming
+version: 1.0.0
+description: Generate, evaluate, and standardise memorable project names and aliases for business, operational, technology, and transformation initiatives. Use when asked to name a project, create a codename, compare naming candidates, or establish naming conventions for a portfolio.
+tags: [project-management, naming, portfolio]
+status: experimental
