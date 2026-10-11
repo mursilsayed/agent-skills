@@ -34,6 +34,7 @@ The skill-installer will copy itself into your agent's skills directory and from
 
 | Skill | Description | Status | Dependencies |
 |-------|-------------|--------|-------------|
+| [actionable-feedback](skills/actionable-feedback/) | Quickly turn a described scenario into actionable SBI feedback, asking only for what is missing and flagging significant gaps or biases | experimental | — |
 | [confluence-doc-sync](skills/confluence-doc-sync/) | Draft and iterate on Confluence pages in a local Markdown file, publishing to Confluence only on an explicit publish step | experimental | mcp-remote (Atlassian MCP), node>=18 |
 | [context-hub](skills/context-hub/) | Install, uninstall, author, and list context-hub contexts/dimensions in a project's AGENTS.md | experimental | context-hub-repo |
 | [generate-bounded-context-map](skills/generate-bounded-context-map/) | Generate ER diagrams for bounded contexts | stable | python3>=3.9 |

@@ -1,0 +1,5 @@
+name: actionable-feedback
+version: 1.0.0
+description: Quickly turn a described scenario into actionable feedback using the SBI framework (Situation, Behaviour, Impact, Next Step), asking only for what is missing and flagging significant gaps or psychological biases. Use when the user wants to give, write, draft, prepare, or sanity-check feedback for a colleague, direct report, manager, or peer, or says things like "help me give feedback", "how do I tell them", or "review my feedback".
+tags: [feedback, communication, leadership, sbi]
+status: experimental
