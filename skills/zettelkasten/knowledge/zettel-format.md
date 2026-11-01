@@ -1,5 +1,16 @@
 # Zettel Formatting Rules
 
+## What goes inside a zettel
+
+- **One main claim, and the body supports it.** A claim zettel gives reasons, evidence and the warrant that links them. A concept zettel gives examples, boundaries and contrast with nearby concepts. A body that only restates the title or copies passages supports nothing: flag it.
+- **Supporting points are not separate claims.** Mechanism, evidence, examples, caveats and steps are the case for the title.
+- **Split a part out only when a test fires:** the **link test** (the user wants to link to just that part) or the **disagreement test** (someone could disagree with it while agreeing with the title). Don't split upfront.
+- **Old notes are split on the link test only.** A section that repeats an existing zettel becomes one line and a link, with anything unique moved into that zettel first.
+- **An old note whose ideas already live in other zettels is retired, not migrated:** propose moving its unique sentences into those zettels, repointing its backlinks (show each sentence before changing it), then adding `#archived`. Archive, never delete, so a wrong call is easy to undo.
+- **In the user's own words.** Copied passages belong in a source note.
+
+## Formatting
+
 Trilium-bolt fully supports markdown. Every zettel **must** use formatting to aid readability — never write a zettel as plain unformatted prose. Plain prose is invisible in Trilium; structure makes notes scannable and usable on revisit.
 
 | Element | Usage |
