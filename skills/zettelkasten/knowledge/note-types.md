@@ -13,12 +13,13 @@ Operational copy of the rules in `[cheatsheet]Zettelkasten` (Trilium noteId `64l
 | **Recipe** | Doing | `[recipe]<task, including the tool's name>` | None |
 | **Source note** | Input | `[book]`, `[vlog]`, `[blog]`, `[podcast]`, `[project]`, `[research]` prefix | None |
 | **Journal** | Reflection | `[journal]<subject>` | None |
+| **Concept map** | Studying | `[map]<name>`, with a child DOT note `[map]<name> DOT` | `#conceptMap` on the map, `#archived` on the DOT note |
 | **Archived skill** | Reference | `<skill-name>` | `#skill` |
 
 - Every title ends in `-YYYYMMDDHHmmss`, the creation time in Sydney time. Never change it on rename, except to fix a malformed one to the note's real creation time (Trilium's `dateCreated` is UTC; convert it).
 - **No bracket prefix means zettel.**
 - **The name uses the words the user would search with,** and is distinctive enough not to clash with other notes: `[cheatsheet]Kubernetes`, not `[cheatsheet]Tools`. Search titles before proposing a name.
-- A prefix says what kind of note it is, never what it's about. Tags are for indices only (`#outline`, `#personal`, `#project`, `#skill`, `#remnote`, `#draft`), never for topics. `#draft=<failing tests>` always comes with `#iconClass=bx bx-pencil`; see `title-tests.md`. `#remnote=<card Rem ID>` is a pointer set once when a zettel's RemNote card is created; it never changes on retire or reactivate, because RemNote keeps the card's state in its child item (rules in `[cheatsheet]Flashcards`, noteId `ADgOngsTojLa`). When updating a zettel that has `#remnote`, check whether its card needs the same change.
+- A prefix says what kind of note it is, never what it's about. Tags are for indices only (`#outline`, `#personal`, `#project`, `#skill`, `#conceptMap`, `#remnote`, `#draft`), never for topics. `#draft=<failing tests>` always comes with `#iconClass=bx bx-pencil`; see `title-tests.md`. `#remnote=<card Rem ID>` is a pointer set once when a zettel's RemNote card is created; it never changes on retire or reactivate, because RemNote keeps the card's state in its child item (rules in `[cheatsheet]Flashcards`, noteId `ADgOngsTojLa`). When updating a zettel that has `#remnote`, check whether its card needs the same change.
 - **Journal notes are append only.** Never edit past entries. New learning goes in a new dated entry at the top, pointing back to the old one.
 
 ## Zettel title forms
@@ -40,12 +41,13 @@ Run the title tests in [`title-tests.md`](./title-tests.md) on every new or rena
 | From | Can link to |
 |------|-------------|
 | **Zettel** | Other zettels. May cite a source note, but must make sense without it. Never outlines |
-| **Outline** | Zettels, the topic's cheat sheet, source notes and other outlines. Never recipes |
+| **Outline** | Zettels, the topic's cheat sheet, concept maps, source notes and other outlines. Never recipes |
 | **Cheat sheet** | Recipes (on the task's line), the zettel holding a rule's why, official docs |
 | **Recipe** | Zettels for any insight beyond the tool |
 
 - **Every zettel is linked from at least one outline.** Add it to another outline only if you can name the note it sits under there, and say why.
 - **Every recipe is linked from at least one cheat sheet.**
+- **Every concept map is linked from at least one outline,** in its `## Concept maps` section.
 - **One cheat sheet per topic by default, never one per term.** A tool or process within the topic gets its own cheat sheet only once it has about three lines of the user's own answers or serves more than one topic; the topic's cheat sheet links to it (e.g. `[cheatsheet]Flashcards` from `[cheatsheet]Zettelkasten`). A cheat sheet can start as a placeholder: one sentence in the user's words on what the topic is, and a link to the official docs or repo. Terms inside a topic (e.g. kubectx, minikube) are lines in its cheat sheet, not notes. Don't create a zettel or a reference note that restates the docs; the why is in Trilium zettel `qvfNGl6OdJN5`.
 - Don't add back links: Trilium shows backlinks automatically.
 

@@ -1,5 +1,5 @@
 name: zettelkasten
-version: 1.2.0
+version: 1.4.0
 description: Create, update and search notes in Trilium, the tool that holds the Zettelkasten
 tags: [knowledge-management, trilium, zettelkasten]
 status: stable
@@ -24,7 +24,7 @@ system-deps:
 
 npm-packages: []
 pip-packages: []
-includes: [ABOUT.md, knowledge/, templates/]
+includes: [ABOUT.md, knowledge/, templates/, scripts/]
 
 verify:
   - description: "MCP server responds"
