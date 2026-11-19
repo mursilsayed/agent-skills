@@ -29,12 +29,11 @@ Before changing the content of **any** Trilium note, call `create_revision(noteI
 | 2 | Update zettel | concept already exists as a zettel | [Workflow 2: Update zettel](#workflow-2-update-zettel) |
 | 3 | Search zettel | "find notes about X", exploring a cluster | [Workflow 3: Search zettel](#workflow-3-search-zettel) |
 | 4 | Archive skill file to Trilium | saving a skill/code file verbatim | [Workflow 4: Archive skill file to Trilium](#workflow-4-archive-skill-file-to-trilium) |
-| 5 | Edit other Trilium note | changing a note that is not a zettel (project notes, templates, instructions). For a concept map or its DOT note, use Workflow 10 | [Workflow 5: Edit other Trilium note](#workflow-5-edit-other-trilium-note) |
+| 5 | Edit other Trilium note | changing a note that is not a zettel (project notes, templates, instructions). For any diagram, concept map or DOT note, use the `trilium-diagrams` skill | [Workflow 5: Edit other Trilium note](#workflow-5-edit-other-trilium-note) |
 | 6 | Add a cheat sheet line | a command, shortcut or rule to remember for a tool or method, or a placeholder for a new tool with its docs link | [Workflow 6: Add a cheat sheet line](#workflow-6-add-a-cheat-sheet-line) |
 | 7 | Promote a line to a recipe | a cheat sheet line now needs several steps or explanation | [Workflow 7: Promote a line to a recipe](#workflow-7-promote-a-line-to-a-recipe) |
 | 8 | Sort an old tool note | touching a legacy note about a tool or tool feature | [Workflow 8: Sort an old tool note](#workflow-8-sort-an-old-tool-note) |
-| 9 | Create concept map | "new concept map", the same result as the launch bar's New concept map button | [Workflow 9: Create concept map](#workflow-9-create-concept-map) |
-| 10 | Edit concept map by chat | add, rename, restyle, link or remove concepts and relations on an existing map | [Workflow 10: Edit concept map by chat](#workflow-10-edit-concept-map-by-chat) |
+| 9 | Concept maps and diagrams | "new concept map", "draw a diagram of …", editing or reviewing a map | [Workflow 9: Concept maps and diagrams](#workflow-9-concept-maps-and-diagrams) |
 
 If the request doesn't clearly match exactly one workflow, ask the user which one they want rather than guessing.
 If the user asks what this skill can do, or asks to list workflows, show this table instead of running any workflow.
@@ -127,43 +126,14 @@ Only when the user touches the note, never as a cleanup sweep. Ask which applies
 
 Archive rather than delete, so a wrong call is easy to undo.
 
-### Workflow 9: Create concept map
+### Workflow 9: Concept maps and diagrams
 
-Creates the same two notes as the launch bar's New concept map button: a Render note the user studies, and a child DOT note holding the map text. The map starts as one frozen box with the name. The user draws the rest with **✏️ Edit layout**. This workflow does not draw concepts from instructions or documents.
+Creating, editing and reviewing concept maps and other diagrams is done by the **`trilium-diagrams` skill**: load it and follow its workflows, with `--profile concept-map` for a concept map. This skill adds only the note rules:
 
-1. **Find the renderer:** `search_notes('note.title = "Graphviz renderer"')`. If there is no match, stop and tell the user to do the one-time setup in the `trilium-concept-maps` README. Never create the renderer. If there are several, ask which one
-2. **Name it:** use the name the user gave, or ask for one. Search titles first, and tell the user if a similar map exists. Take one timestamp (`YYYYMMDDHHmmss`, Sydney time) for both titles:
-   - Map: `[map]<name>-<timestamp>`
-   - DOT: `[map]<name> DOT-<timestamp>`
-3. **Pick the parent:** the note the user names, otherwise the current month's `zettels` folder (`search_notes("#inbox")`)
-4. **Fill in [`./templates/concept-map.dot`](./templates/concept-map.dot)**, keeping every other character as it is:
-   - `{{NAME}}`: the name
-   - `{{LABEL}}`: the name, with `\` written as `\\` and `"` written as `\"`
-   - `{{WIDTH}}`: the larger of `1.2` and `(characters in the name × 7 + 36) / 72`, to three decimals
-   - `{{DATE}}`: today as `YYYY-MM-DD`
-5. **Create the map:** `create_note` under the parent, with `type: "render"`, `content: ""`, the relation `renderNote` set to the renderer's noteId, and the label `conceptMap`
-6. **Create the DOT note:** `create_note` under the map, with `type: "code"`, `mime: "text/plain"`, the filled-in text as `content`, and the label `archived`
-7. **Connect them:** `update_note` on the map, with `attributes` holding the relation `dotSource` set to the DOT note's noteId
-8. **Verify:** `get_note` on both with `includeContent: false`, and check the map has `renderNote`, `dotSource` and `conceptMap`, and the DOT note has `archived`. The MCP server can't run the renderer, so ask the user to open the map to confirm it draws
-9. **Link from an outline:** read the closest outline, propose adding the map as a reference link in its `## Concept maps` section (a plain list, always the outline's first section, created if missing), and write it after approval. Link the map note, not the DOT note. Call `create_revision` on the outline first
-
-If a step fails, report the noteIds created so far and stop. Don't retry or delete without asking, because a map with no `dotSource` only shows *No DOT source*.
-
-### Workflow 10: Edit concept map by chat
-
-Nothing already on a map moves, because the user memorises where each concept sits. Never write `pos`, `lp`, `bb`, `width` or `height` by hand, and never patch the DOT text directly: every edit goes through [`./scripts/edit-concept-map.mjs`](./scripts/edit-concept-map.mjs), which refuses anything that would move an existing concept or reroute an existing arrow. To move, resize or regroup, send the user to **✏️ Edit layout**.
-
-1. **Find the map:** search for `#conceptMap` and the map's name, or use the note the user names, and confirm the type is `render`. Its `dotSource` relation gives the DOT note. The DOT note is `#archived`, so don't search for it
-2. **Check for an open layout session:** `search_notes("#conceptMapSession")`, then `get_note` each result with `includeContent: false`. If one has an `editsMap` relation to this map, stop and ask the user to finish or cancel it first
-3. **Read the DOT:** `get_note` on the DOT note. Save `content` unchanged to a temporary file, and keep `utcDateModified`
-4. **List what's on the map:** `node ./scripts/edit-concept-map.mjs list <map.dot>` gives the concept ids, labels and relation keys. If it refuses, tell the user why and stop
-5. **Write the edits** as a JSON list in a temporary file. The edit forms are at the top of the script. Give each new concept a `near`, the concept it belongs beside, and a `ref` that later edits can use as `from` or `to`. Use `kind`, `main` and `rel=is_a` only as they mean in the legend (activity, process, outcome; main path or key idea; "is a kind of"), and prefer `id:<noteId>` links
-6. **Dry run:** `node ./scripts/edit-concept-map.mjs apply <map.dot> <edits.json> <temporary folder>`. It writes nothing to Trilium. If `status` is `refused`, show the `problems` and fix the edits or stop. If it's `no-changes`, tell the user and stop
-7. **Get approval:** show `changeList` and any `warnings`, and give the path of `preview` (an SVG showing positions, without legend colours). New concepts are placed automatically in free space, so point them out. Don't save until the user approves
-8. **Save:** `create_revision` on the DOT note, then `update_note` with the full text of `proposed` as `content` and `expectedUtcDateModified` set to the value from step 3. If the write is rejected, the user changed the map meanwhile, so start again from step 3
-9. **Verify:** check that `contentSha256` from `get_note` (`includeContent: false`) equals the dry run's `sha256`. The MCP server can't run the renderer, so ask the user to reopen the map to confirm it draws
-
-Domain stories and maps that aren't frozen are refused. A story's text is edited directly, and a map that isn't frozen needs **📌 Freeze layout** first. Drawing a whole map from instructions or documents, and reviewing `#needsReview` sessions, are not covered yet.
+1. **Title and label** per [`./knowledge/note-types.md`](./knowledge/note-types.md): `[map]` and `#conceptMap` for a concept map, `[diagram]` with no label for any other diagram
+2. **Default parent:** the current month's `zettels` folder (`search_notes("#inbox")`)
+3. **Link a concept map from an outline:** read the closest outline, propose adding the map as a reference link in its `## Concept maps` section (a plain list, always the outline's first section, created if missing), and write it after approval. Link the map note, not the DOT note. Call `create_revision` on the outline first
+4. **Link concepts to zettels** where one exists (`URL="id:<noteId>"` on the concept), after searching for it
 
 ---
 

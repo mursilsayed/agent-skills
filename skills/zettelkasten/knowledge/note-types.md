@@ -14,6 +14,7 @@ Operational copy of the rules in `[cheatsheet]Zettelkasten` (Trilium noteId `64l
 | **Source note** | Input | `[book]`, `[vlog]`, `[blog]`, `[podcast]`, `[project]`, `[research]` prefix | None |
 | **Journal** | Reflection | `[journal]<subject>` | None |
 | **Concept map** | Studying | `[map]<name>`, with a child DOT note `[map]<name> DOT` | `#conceptMap` on the map, `#archived` on the DOT note |
+| **Diagram** | Explaining | `[diagram]<name>`, with a child DOT note `[diagram]<name> DOT` | None on the diagram, `#archived` on the DOT note |
 | **Archived skill** | Reference | `<skill-name>` | `#skill` |
 
 - Every title ends in `-YYYYMMDDHHmmss`, the creation time in Sydney time. Never change it on rename, except to fix a malformed one to the note's real creation time (Trilium's `dateCreated` is UTC; convert it).

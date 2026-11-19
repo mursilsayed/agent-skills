@@ -1,0 +1,41 @@
+name: trilium-diagrams
+version: 1.0.0
+description: Create, edit and review diagrams in Trilium that are stored as frozen Graphviz DOT and drawn by the Graphviz renderer — architecture diagrams, pictures of an idea, flows, and concept maps. Use whenever the user wants a diagram, a concept map or a visual of something in Trilium, or mentions a [diagram] or [map] note, a DOT note, Edit layout or a #needsReview session.
+tags: [trilium, diagrams, graphviz, concept-maps]
+status: experimental
+
+mcp-servers:
+  - name: trilium
+    package: trilium-bolt
+    type: stdio
+    command: npx
+    args: ["-y", "trilium-bolt"]
+    env:
+      - name: TRILIUM_TOKEN
+        description: "Trilium ETAPI token (generate in Trilium > Options > ETAPI)"
+        required: true
+        secret: true
+    scope: global
+
+system-deps:
+  - name: node
+    min-version: "18"
+    check-command: "node --version"
+  - name: npx
+    check-command: "npx --version"
+
+npm-packages: []
+pip-packages: []
+includes: [ABOUT.md, knowledge/]
+
+verify:
+  - description: "Skill file installed"
+    check: file-exists
+    path: "~/.claude/skills/trilium-diagrams/SKILL.md"
+  - description: "Diagram tools download and run"
+    command: "npx -y trilium-graphviz-diagrams@latest version"
+    expect: exit-code-0
+  - description: "Trilium API reachable"
+    tool: mcp__trilium__search_notes
+    args: { query: "note.title = \"Graphviz renderer\"" }
+    expect: no-error

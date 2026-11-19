@@ -44,6 +44,7 @@ The skill-installer will copy itself into your agent's skills directory and from
 | [project-naming](skills/project-naming/) | Generate, evaluate, and standardise memorable project names and aliases | experimental | — |
 | [skill-installer](skills/skill-installer/) | Meta skill: install, update, manage other skills | stable | — |
 | [strategy-document](skills/strategy-document/) | Create, review, and audit strategy documents (Roger Martin framework) | stable | trilium-bolt (MCP, for regenerating the skill from source), node>=18 |
+| [trilium-diagrams](skills/trilium-diagrams/) | Create, edit and review frozen Graphviz diagrams and concept maps in Trilium | experimental | trilium-bolt (MCP), node>=18, npx |
 | [zettelkasten](skills/zettelkasten/) | Create, update and search notes in Trilium, the tool that holds the Zettelkasten | stable | trilium-bolt (MCP), node>=18 |
 
 ## How It Works
