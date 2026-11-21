@@ -29,6 +29,7 @@ The tools must be the release whose converter is installed in Trilium, or the ag
 
 - **Approval first.** Show the change list, warnings and the preview path, and write nothing until the user approves.
 - **Never write DOT positions by hand** (`pos`, `lp`, `bb`, `width`, `height`) and never patch a DOT note's text. Every change goes through `$TOOLS`.
+- **Reading a DOT note: stop at `// ---- Positions:`.** Everything above that line is the diagram: groups, shapes, arrows, labels, links and looks. `node [...]` and `edge [...]` hold the plain look, and each shape or arrow lists only how it differs (a shape without `color` has the plain colour). Below the line are only frame and shape positions, which carry no meaning. A DOT note without that line is in the older form, with positions and arrow routes on the same lines; it is rewritten in the new form at its next save.
 - **Revision first.** `create_revision` on a note before changing its content, then write with `expectedUtcDateModified`. If the write is rejected, the user changed it meanwhile: start again from reading it.
 - **Verify by hash.** After writing, `get_note` with `includeContent: false` and check `contentSha256` equals the `sha256` the tools printed. The MCP server can't run the renderer, so ask the user to open the diagram to confirm it draws.
 - **Titles:** take one timestamp (`YYYYMMDDHHmmss`, Sydney time) for both notes.

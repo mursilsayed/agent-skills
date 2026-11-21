@@ -1,5 +1,5 @@
 name: trilium-diagrams
-version: 1.0.0
+version: 1.1.0
 description: Create, edit and review diagrams in Trilium that are stored as frozen Graphviz DOT and drawn by the Graphviz renderer — architecture diagrams, pictures of an idea, flows, and concept maps. Use whenever the user wants a diagram, a concept map or a visual of something in Trilium, or mentions a [diagram] or [map] note, a DOT note, Edit layout or a #needsReview session.
 tags: [trilium, diagrams, graphviz, concept-maps]
 status: experimental
